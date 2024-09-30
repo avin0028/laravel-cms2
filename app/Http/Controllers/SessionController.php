@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 use PharIo\Manifest\Email;
 
@@ -18,7 +18,7 @@ class SessionController extends Controller
 
         $attributes = $request->validate([
             'email'=> ['required','email'],
-            'password'=> ['required',Password::min('6'),]
+            'password'=> ['required',Password::min('6')]
         ]);
 
         if(!Auth::attempt($attributes)){
@@ -27,7 +27,12 @@ class SessionController extends Controller
             ]);
         }
         $request->session()->regenerate();
-        redirect('/');
+        return redirect('/');
         
+    }
+
+    public function destroy(){
+        Auth::logout();
+        return redirect('/login');
     }
 }

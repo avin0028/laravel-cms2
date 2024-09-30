@@ -44,4 +44,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+ 
+
+    public function hasRole(array $roles)
+{
+    return in_array($this->role, $roles);
+}
 }
