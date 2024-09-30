@@ -18,5 +18,8 @@ class Post extends Model
         'url'
     ];
 
-
+    public function categories()
+    {
+      return $this->belongsToMany(Category::class);
+    }
 }

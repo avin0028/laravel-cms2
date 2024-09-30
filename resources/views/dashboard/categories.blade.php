@@ -12,7 +12,7 @@
                 <tr>
                     
                     <th scope="col">Category Name</th>
-                    <th scope="col">Parent ID</th>
+                    <th scope="col">Parent Name</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -21,7 +21,7 @@
                 <tr>
                     
                     <td>{{ $category->name }}</td>
-                    <td>{{ $category->parent_id ?? 'None' }}</td>
+                    <td>{{ $category->parent->name ?? 'None' }}</td>
                     <td>
                         <!-- Delete Button -->
                         <form method="POST" action="{{ route('dashboard.deletecategory', $category->id) }}" style="display:inline-block;">

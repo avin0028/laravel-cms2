@@ -131,7 +131,7 @@
                                         <a class="nav-link" href="#">Show Posts</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('dashboard.newpost')}}">New Post</a>
+                                        <a class="nav-link" href="{{route('newpost')}}">New Post</a>
                                     </li>
                     
                                 </ul>

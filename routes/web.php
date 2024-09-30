@@ -3,6 +3,8 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisteredUser;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\PostController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::view('/','dashboard.index');
@@ -20,10 +22,22 @@ Route::controller(SessionController::class)->group(function(){
 
 Route::prefix('/dashboard')->group(function(){
     Route::view('/','dashboard.index')->name('dashboard.index');
-    Route::view('/newpost','dashboard.newpost')->name('dashboard.newpost');
-    Route::get('/newcategory',[CategoryController::class,'create'])->name('dashboard.newcategory');
-    Route::post('/newcategory',[CategoryController::class,'store'])->name('category.store');
-    Route::get('/categories',[CategoryController::class,'index'])->name('dashboard.categories');
-    Route::delete('/categories/{id}',[CategoryController::class,'destroy'])->name('dashboard.deletecategory');
+
+    Route::controller(CategoryController::class)->group(function(){
+
+        Route::get('/newcategory','create')->name('dashboard.newcategory');
+        Route::post('/newcategory','store')->name('category.store');
+        Route::get('/categories','index')->name('dashboard.categories');
+        Route::delete('/categories/{id}','destroy')->name('dashboard.deletecategory');
+    });
+    Route::controller(PostController::class)->group(function(){
+        Route::get('/newpost','create')->name('newpost');
+        Route::post('/newpost','store')->name('storepost');
+
+    });
 
 })->middleware('auth');
+
+Route::controller(PostController::class)->group(function(){
+    Route::get('/posts/{id}','show')->name('showpost');
+});

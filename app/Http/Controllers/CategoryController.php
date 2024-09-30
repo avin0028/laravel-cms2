@@ -11,18 +11,16 @@ class CategoryController extends Controller
         $categories = Category::all();
         return view('dashboard.categories',compact('categories'));
     }
+
     public function create(Request $request){
         $categories = Category::all();
         return view('dashboard.newcategory',compact('categories'));
       }
+
       public function store(Request $request)
       {
-        //  if($request->delete){
-        //    $request->validate(['delete'=> ['required','max:25','string']]);
-     
-        //    Category::where('name',$request->delete)->delete();
-        // }else{
-           $request->validate(['name'=> ['required','max:25','string']]);
+ 
+        $request->validate(['name'=> ['required','max:25','string']]);
         $category = new Category();
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
