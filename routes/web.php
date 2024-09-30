@@ -5,7 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RegisteredUser;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\PostController;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +37,8 @@ Route::prefix('/dashboard')->group(function(){
         Route::post('/newpost','store')->name('storepost');
         Route::get('/posts','showbyUser')->name('showpostbyuser');
         Route::delete('/posts/{post}','destroy')->name('deletepost');
+        Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('postedit');
+        Route::put('/posts/{post}', [PostController::class, 'update'])->name('postupdate');
 
     });
 

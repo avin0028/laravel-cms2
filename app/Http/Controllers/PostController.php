@@ -9,24 +9,53 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class PostController extends Controller
 {
     use AuthorizesRequests;
+
     public function index(){
         return 'pain';
     }
+
     public function show($url)
     {
         $post = Post::where('url', $url)->firstOrFail();
         return view('showpost', compact('post'));
     }
+
     public function showbyUser(){
         $posts = Post::all();
         return view('dashboard.posts',compact('posts'));
 
-
-
     }
+
     public function destroy(Post $post){
         $this->authorize('delete', $post);
         $post->delete();
+        return redirect()->route('showpostbyuser');
+    }
+    public function edit(Post $post){
+        $categories = Category::all(); // Assume you are fetching categories from the database
+        return view('dashboard.editpost', compact('post', 'categories'));
+    }
+    public function update(Request $request, Post $post)
+    {
+        $request->validate([
+            'title' => ['required', 'string', 'max:25'],
+            'content' => ['required', 'string', 'max:255'],
+            'url'=> ['required','max:20'],
+            'status'=>['required'],
+            'tags'=>['string'],
+
+        ]);
+    
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'tags' => $request->tags,
+            'url' => $request->url,
+            'status' => $request->status,
+        ]);
+    
+        $post->categories()->sync($request->categories);
+    
         return redirect()->route('showpostbyuser');
     }
     public function create(){
@@ -34,6 +63,7 @@ class PostController extends Controller
         $categories = Category::all();
         return view('dashboard.newpost', compact('categories'));
     }
+
     public function store(Request $request){
         $request->validate([
             'title' => ['required', 'string', 'max:25'],
@@ -43,7 +73,6 @@ class PostController extends Controller
             'tags'=>['string'],
 
         ]);
-      
 
         $post = new Post();
         $post->author_id = Auth::id();
