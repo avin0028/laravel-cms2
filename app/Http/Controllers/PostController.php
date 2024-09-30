@@ -11,6 +11,11 @@ class PostController extends Controller
     public function index(){
         return 'pain';
     }
+    public function show($url)
+    {
+        $post = Post::where('url', $url)->firstOrFail();
+        return view('showpost', compact('post'));
+    }
     public function create(){
         $categories = Category::all();
         return view('dashboard.newpost', compact('categories'));

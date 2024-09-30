@@ -39,5 +39,5 @@ Route::prefix('/dashboard')->group(function(){
 })->middleware('auth');
 
 Route::controller(PostController::class)->group(function(){
-    Route::get('/posts/{id}','show')->name('showpost');
+    Route::get('posts/{url}','show')->name('showpost');
 });
