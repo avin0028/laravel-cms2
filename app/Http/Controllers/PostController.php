@@ -11,7 +11,10 @@ class PostController extends Controller
     use AuthorizesRequests;
 
     public function index(){
-        return 'pain';
+        $posts = Post::where('status', 1) 
+        ->paginate(3);
+
+        return view('posts', compact('posts'));
     }
 
     public function show($url)
@@ -32,11 +35,15 @@ class PostController extends Controller
         return redirect()->route('showpostbyuser');
     }
     public function edit(Post $post){
+        $this->authorize('update', $post);
+
         $categories = Category::all(); // Assume you are fetching categories from the database
         return view('dashboard.editpost', compact('post', 'categories'));
     }
     public function update(Request $request, Post $post)
     {
+        $this->authorize('update', $post);
+
         $request->validate([
             'title' => ['required', 'string', 'max:25'],
             'content' => ['required', 'string', 'max:255'],

@@ -9,7 +9,7 @@ use App\Http\Controllers\PostController;
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/','dashboard.index');
+Route::get('/',[PostController::class,'index']);
 
 Route::controller(RegisteredUser::class)->group(function(){
     Route::get('/register','index')->name('register.index');
