@@ -5,9 +5,10 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class PostController extends Controller
 {
+    use AuthorizesRequests;
     public function index(){
         return 'pain';
     }
@@ -16,7 +17,20 @@ class PostController extends Controller
         $post = Post::where('url', $url)->firstOrFail();
         return view('showpost', compact('post'));
     }
+    public function showbyUser(){
+        $posts = Post::all();
+        return view('dashboard.posts',compact('posts'));
+
+
+
+    }
+    public function destroy(Post $post){
+        $this->authorize('delete', $post);
+        $post->delete();
+        return redirect()->route('showpostbyuser');
+    }
     public function create(){
+      
         $categories = Category::all();
         return view('dashboard.newpost', compact('categories'));
     }

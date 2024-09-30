@@ -25,13 +25,13 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->parent_id = $request->parent_id;
         $category->save();
-        return redirect()->route('dashboard.categories');
+        return redirect()->route('categories');
       }
       public function destroy($id){
         $category = Category::findOrFail($id);
         $category->delete();
     
-        return redirect()->route('dashboard.categories');
+        return redirect()->route('categories');
     
       }
 }

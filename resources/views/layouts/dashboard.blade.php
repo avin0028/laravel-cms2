@@ -103,7 +103,7 @@
                     <li class="nav-item">
                         <form method="post" action="{{route('logout')}}">
                             @csrf
-                        <button type="submit" class="nav-link" href="#">Logout</a>
+                        <button type="submit" class="nav-link" >Logout</a>
                         </form>
                     </li>
                 </ul>
@@ -117,7 +117,9 @@
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar">
                 <h5 class="sidebar-heading">Main Menu</h5>
                 <div class="accordion" id="sidebarAccordion">
-
+                    @can('admin-writer')
+                        
+                    
                     <div class="accordion-item bg-dark border-0">
                         <h2 class="accordion-header" id="headingDashboard">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDashboard" aria-expanded="false" aria-controls="collapseDashboard">
@@ -128,7 +130,7 @@
                             <div class="accordion-body">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Show Posts</a>
+                                        <a class="nav-link" href="{{route('showpostbyuser')}}">Show Posts</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('newpost')}}">New Post</a>
@@ -138,8 +140,9 @@
                             </div>
                         </div>
                     </div>
-
+                    @endcan
                  
+                    @can('admin')
                     <div class="accordion-item bg-dark border-0">
                         <h2 class="accordion-header" id="headingOrders">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrders" aria-expanded="false" aria-controls="collapseOrders">
@@ -153,14 +156,13 @@
                                         <a class="nav-link" href="{{route('dashboard.newcategory')}}">New category</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="">Show Categories</a>
+                                        <a class="nav-link" href="{{route('categories')}}">Show Categories</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Products Accordion -->
+                    @endcan
                     <div class="accordion-item bg-dark border-0">
                         <h2 class="accordion-header" id="headingProducts">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
@@ -183,7 +185,6 @@
 
                     <div class="divider"></div>
 
-                    <!-- Reports Accordion -->
                     <h5 class="sidebar-heading">Reports</h5>
                     <div class="accordion-item bg-dark border-0">
                         <h2 class="accordion-header" id="headingReports">
@@ -208,7 +209,6 @@
                 </div>
             </nav>
 
-            <!-- Main Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
                 @yield('content')
             </main>

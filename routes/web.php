@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RegisteredUser;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\PostController;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use Illuminate\Support\Facades\Route;
 
@@ -27,17 +29,21 @@ Route::prefix('/dashboard')->group(function(){
 
         Route::get('/newcategory','create')->name('dashboard.newcategory');
         Route::post('/newcategory','store')->name('category.store');
-        Route::get('/categories','index')->name('dashboard.categories');
+        Route::get('/categories','index')->name('categories');
         Route::delete('/categories/{id}','destroy')->name('dashboard.deletecategory');
     });
     Route::controller(PostController::class)->group(function(){
         Route::get('/newpost','create')->name('newpost');
         Route::post('/newpost','store')->name('storepost');
+        Route::get('/posts','showbyUser')->name('showpostbyuser');
+        Route::delete('/posts/{post}','destroy')->name('deletepost');
 
     });
 
 })->middleware('auth');
+Route::post('comments/store', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
 
 Route::controller(PostController::class)->group(function(){
     Route::get('posts/{url}','show')->name('showpost');
+    
 });
