@@ -12,6 +12,22 @@ class RegisteredUser extends Controller
     public function index(){
         return view('auth.register');
     }
+    public function create(){
+
+        return view('dashboard.registeruser');
+    }
+    public function createtheuser(Request $request){
+        $attributes = $request->validate([
+            'name'=> ['required','min:3','max:25'],
+            'email'=> ['required','email'],
+            'password'=> ['required',Password::min('6')],
+            'role'=> ['required'],
+            
+        ]);
+       
+         User::create($attributes);
+        return back()->with('success','user '. $request->name . ' created');
+    }
     public function store(Request $request){
 
         $attributes = $request->validate([

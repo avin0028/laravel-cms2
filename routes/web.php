@@ -54,12 +54,12 @@ Route::prefix('/dashboard')->group(function(){
     Route::post('/comments/{comment}',[CommentController::class,'action'])->name('actioncomment');
 
 
+    Route::get('/registeruser',[RegisteredUser::class,'create'])->name('createuser')->middleware('can:admin');
+    Route::post('/registeruser',[RegisteredUser::class,'createtheuser'])->name('createtheuser')->middleware('can:admin');
+
+
 })->middleware('auth');
 
 Route::post('comments/store', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
 Route::get('pages/{url}',[PageController::class,'show'])->name('showpage');
-
-Route::controller(PostController::class)->group(function(){
-    Route::get('posts/{url}','show')->name('showpost');
-    
-});
+Route::get('posts/{url}',[PostController::class,'show'])->name('showpost');

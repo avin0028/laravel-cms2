@@ -202,27 +202,28 @@
                     </div>
                     @endcan
                     <div class="divider"></div>
-
-                    <h5 class="sidebar-heading">Reports</h5>
+                    @can('admin')
+                        
+                    
+                    <h5 class="sidebar-heading">Core</h5>
                     <div class="accordion-item bg-dark border-0">
                         <h2 class="accordion-header" id="headingReports">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="false" aria-controls="collapseReports">
-                                Reports
+                                Users Management
                             </button>
                         </h2>
                         <div id="collapseReports" class="accordion-collapse collapse" aria-labelledby="headingReports">
                             <div class="accordion-body">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Sales Report</a>
+                                        <a class="nav-link" href="{{route('createuser')}}">Create User</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Inventory Report</a>
-                                    </li>
+                           
                                 </ul>
                             </div>
                         </div>
                     </div>
+                    @endcan
 
                 </div>
             </nav>
