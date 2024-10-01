@@ -22,7 +22,7 @@ Route::controller(SessionController::class)->group(function(){
 });
 
 Route::prefix('/dashboard')->group(function(){
-    Route::view('/','dashboard.index')->name('dashboard.index');
+    Route::view('/','dashboard.index')->name('dashboard');
 
     Route::controller(CategoryController::class)->group(function(){
 
