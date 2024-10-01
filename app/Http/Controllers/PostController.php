@@ -37,7 +37,7 @@ class PostController extends Controller
     public function edit(Post $post){
         $this->authorize('update', $post);
 
-        $categories = Category::all(); // Assume you are fetching categories from the database
+        $categories = Category::all(); 
         return view('dashboard.editpost', compact('post', 'categories'));
     }
     public function update(Request $request, Post $post)

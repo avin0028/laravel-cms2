@@ -44,6 +44,8 @@ Route::prefix('/dashboard')->group(function(){
         Route::get('/newpage','create')->name('newpage');
         Route::get('/pages','showbyuser')->name('showpagebyuser');
         Route::post('/newpage','store')->name('storepage');
+        Route::delete('/pages/{page}','destroy')->name('deletepage');
+
     });
 
 })->middleware('auth');
