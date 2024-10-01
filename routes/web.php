@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisteredUser;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\PostController;
-
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[PostController::class,'index']);
@@ -41,9 +40,16 @@ Route::prefix('/dashboard')->group(function(){
         Route::put('/posts/{post}', [PostController::class, 'update'])->name('postupdate');
 
     });
+    Route::controller(PageController::class)->group(function(){
+        Route::get('/newpage','create')->name('newpage');
+        Route::get('/pages','showbyuser')->name('showpagebyuser');
+        Route::post('/newpage','store')->name('storepage');
+    });
 
 })->middleware('auth');
+
 Route::post('comments/store', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
+Route::get('pages/{url}',[PageController::class,'show'])->name('showpage');
 
 Route::controller(PostController::class)->group(function(){
     Route::get('posts/{url}','show')->name('showpost');

@@ -141,7 +141,30 @@
                         </div>
                     </div>
                     @endcan
-                 
+                    @can('admin-editor')
+                        
+                   
+                    <div class="accordion-item bg-dark border-0">
+                        <h2 class="accordion-header" id="headingDashboard">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDashboard" aria-expanded="false" aria-controls="collapseDashboard">
+                                Pages Managements
+                            </button>
+                        </h2>
+                        <div id="collapseDashboard" class="accordion-collapse collapse" aria-labelledby="headingDashboard" data-bs-parent="#sidebarAccordion">
+                            <div class="accordion-body">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('showpagebyuser')}}">Show Pages</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('newpage')}}">New Page</a>
+                                    </li>
+                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    @endcan
                     @can('admin')
                     <div class="accordion-item bg-dark border-0">
                         <h2 class="accordion-header" id="headingOrders">
