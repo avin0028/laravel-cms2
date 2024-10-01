@@ -42,9 +42,12 @@ Route::prefix('/dashboard')->group(function(){
     });
     Route::controller(PageController::class)->group(function(){
         Route::get('/newpage','create')->name('newpage');
-        Route::get('/pages','showbyuser')->name('showpagebyuser');
+        Route::get('/pages','showbyuser')->name('showpagesbyuser');
         Route::post('/newpage','store')->name('storepage');
         Route::delete('/pages/{page}','destroy')->name('deletepage');
+        Route::get('/pages/{page}/edit', 'edit')->name('pageedit');
+        Route::put('/pages/{page}', 'update')->name('updatepage');
+
 
     });
 

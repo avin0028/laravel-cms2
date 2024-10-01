@@ -37,7 +37,6 @@
     </div>
 
     <div class="row">
-        <!-- Select Categories Input -->
         <div class="col-md-6 mb-3">
             <label for="categories" class="form-label">Select Categories</label>
             <div class="form-check">
@@ -54,11 +53,11 @@
         <div class="col-md-6 mb-3">
             <label for="status" class="form-label">Post Status</label>
             <div class="form-check">
-                <input type="radio" class="form-check-input" id="status_draft" name="status" value="0" {{ old('status', $post->status) == 0 ? 'checked' : '' }}>
+                <input type="radio" class="form-check-input" id="status_draft" name="status" value="0" {{ old('status') == 0 ? 'checked' : '' }}>
                 <label class="form-check-label" for="status_draft">Draft</label>
             </div>
             <div class="form-check">
-                <input type="radio" class="form-check-input" id="status_publish" name="status" value="1" {{ old('status', $post->status) == 1 ? 'checked' : '' }}>
+                <input type="radio" class="form-check-input" id="status_publish" name="status" value="1" {{ old('status') == 1 ? 'checked' : '' }}>
                 <label class="form-check-label" for="status_publish">Publish</label>
             </div>
             <x-input-error name="status"/>

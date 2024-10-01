@@ -154,7 +154,7 @@
                             <div class="accordion-body">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('showpagebyuser')}}">Show Pages</a>
+                                        <a class="nav-link" href="{{route('showpagesbyuser')}}">Show Pages</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('newpage')}}">New Page</a>

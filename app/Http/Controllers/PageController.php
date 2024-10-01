@@ -26,6 +26,28 @@ class PageController extends Controller
         return view('dashboard.pages',compact('pages'));
 
     }
+    public function edit(Page $page)
+    {
+        $this->authorize('update', $page);
+        return view('dashboard.editpage',compact('page'));
+    }
+    public function update(Request $request,Page $page){
+        $this->authorize('update', $page);
+        $request->validate([
+            'title' => ['required', 'string', 'max:25'],
+            'content' => ['required', 'string', 'max:255'],
+            'url'=> ['required','max:20'],
+            'status'=>['required'],
+        ]);
+        $page->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'url' => $request->url,
+            'status' => $request->status,
+        ]);
+        return redirect()->route('showpagesbyuser');
+
+    }
    
    public function store(Request $request){
     $this->authorize('create', Page::class);

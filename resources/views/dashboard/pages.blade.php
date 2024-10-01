@@ -23,7 +23,7 @@
                         <td>{{ $page->title }}</td>
                         <td><a href="" class="text-info" target="_blank">{{ $page->url }}</a></td>
                         <td>
-                            <a href="{{route('postedit',$page->id)}}" class="btn btn-sm btn-primary">
+                            <a href="{{route('pageedit',$page->id)}}" class="btn btn-sm btn-primary">
                                 Edit
                             </a>
                        
