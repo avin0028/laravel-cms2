@@ -99,11 +99,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-
                     <li class="nav-item">
                         <form method="post" action="{{route('logout')}}">
                             @csrf
-                        <button type="submit" class="nav-link" >Logout</a>
+                            <button type="submit" class="nav-link">Logout</button>
                         </form>
                     </li>
                 </ul>
@@ -115,18 +114,17 @@
         <div class="row">
             <!-- Accordion Sidebar with Dark Mode and Enhanced Visibility -->
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar">
-                <h5 class="sidebar-heading">Main Menu</h5>
+                <h5 class="sidebar-heading">Content Management </h5>
                 <div class="accordion" id="sidebarAccordion">
-                    @can('admin-writer')
-                        
-                    
+
+                    <!-- Posts Management Accordion -->
                     <div class="accordion-item bg-dark border-0">
-                        <h2 class="accordion-header" id="headingDashboard">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDashboard" aria-expanded="false" aria-controls="collapseDashboard">
-                                Posts Managements
+                        <h2 class="accordion-header" id="headingPosts">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePosts" aria-expanded="false" aria-controls="collapsePosts">
+                                Posts Management
                             </button>
                         </h2>
-                        <div id="collapseDashboard" class="accordion-collapse collapse" aria-labelledby="headingDashboard" data-bs-parent="#sidebarAccordion">
+                        <div id="collapsePosts" class="accordion-collapse collapse" aria-labelledby="headingPosts">
                             <div class="accordion-body">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
@@ -135,22 +133,19 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('newpost')}}">New Post</a>
                                     </li>
-                    
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    @endcan
-                    @can('admin-editor')
-                        
-                   
+
+                    <!-- Pages Management Accordion -->
                     <div class="accordion-item bg-dark border-0">
-                        <h2 class="accordion-header" id="headingDashboard">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDashboard" aria-expanded="false" aria-controls="collapseDashboard">
-                                Pages Managements
+                        <h2 class="accordion-header" id="headingPages">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                Pages Management
                             </button>
                         </h2>
-                        <div id="collapseDashboard" class="accordion-collapse collapse" aria-labelledby="headingDashboard" data-bs-parent="#sidebarAccordion">
+                        <div id="collapsePages" class="accordion-collapse collapse" aria-labelledby="headingPages">
                             <div class="accordion-body">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
@@ -159,24 +154,23 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('newpage')}}">New Page</a>
                                     </li>
-                    
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    @endcan
+
                     @can('admin')
                     <div class="accordion-item bg-dark border-0">
-                        <h2 class="accordion-header" id="headingOrders">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrders" aria-expanded="false" aria-controls="collapseOrders">
+                        <h2 class="accordion-header" id="headingCategories">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
                                 Manage Categories
                             </button>
                         </h2>
-                        <div id="collapseOrders" class="accordion-collapse collapse" aria-labelledby="headingOrders" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseCategories" class="accordion-collapse collapse" aria-labelledby="headingCategories">
                             <div class="accordion-body">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{route('dashboard.newcategory')}}">New category</a>
+                                        <a class="nav-link" href="{{route('dashboard.newcategory')}}">New Category</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{route('categories')}}">Show Categories</a>
@@ -186,26 +180,27 @@
                         </div>
                     </div>
                     @endcan
+                    @can('admin')
+                        
+                    
                     <div class="accordion-item bg-dark border-0">
                         <h2 class="accordion-header" id="headingProducts">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
-                                Products
+                                Manage Comments
                             </button>
                         </h2>
-                        <div id="collapseProducts" class="accordion-collapse collapse" aria-labelledby="headingProducts" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseProducts" class="accordion-collapse collapse" aria-labelledby="headingProducts">
                             <div class="accordion-body">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">All Products</a>
+                                        <a class="nav-link" href="{{route('managecomments')}}">Confirm Comments</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Add New Product</a>
-                                    </li>
+                                  
                                 </ul>
                             </div>
                         </div>
                     </div>
-
+                    @endcan
                     <div class="divider"></div>
 
                     <h5 class="sidebar-heading">Reports</h5>
@@ -215,7 +210,7 @@
                                 Reports
                             </button>
                         </h2>
-                        <div id="collapseReports" class="accordion-collapse collapse" aria-labelledby="headingReports" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseReports" class="accordion-collapse collapse" aria-labelledby="headingReports">
                             <div class="accordion-body">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">

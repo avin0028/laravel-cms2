@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,14 @@ class PostController extends Controller
     public function show($url)
     {
         $post = Post::where('url', $url)->firstOrFail();
-        return view('showpost', compact('post'));
+        $comments = Comment::where('status', 1)
+        ->whereNull('parent_id')
+        ->where('post_id', $post->id)
+        ->with(['replies' => function ($query) {
+            $query->where('status', 1); 
+        }])
+        ->get();
+        return view('showpost', compact('post','comments'));
     }
 
     public function showbyUser(){

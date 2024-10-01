@@ -87,8 +87,14 @@
         <div class="mb-4 w-50">
             <h3 class="text-light">Comments</h3>
 
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        
             
-            @foreach($post->comments as $comment)
+            @foreach($comments as $comment)
                 <div class="comment-box">
                     
                     <strong>{{ $comment->user->name }}</strong> 
@@ -142,7 +148,6 @@
         </div>
     </div>
 
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

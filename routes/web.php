@@ -50,6 +50,9 @@ Route::prefix('/dashboard')->group(function(){
 
 
     });
+    Route::get('/comments',[CommentController::class,'index'])->name('managecomments');
+    Route::post('/comments/{comment}',[CommentController::class,'action'])->name('actioncomment');
+
 
 })->middleware('auth');
 
