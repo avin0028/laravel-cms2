@@ -14,6 +14,9 @@ class PageController extends Controller
 
     public function show(String $url){
         $page = Page::where('url',$url)->first();
+        if($page->status == 0){
+            abort(404);
+        }
         return view('showpage',compact('page'));
     }
    public function create(){

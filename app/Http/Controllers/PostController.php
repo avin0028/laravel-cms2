@@ -21,6 +21,9 @@ class PostController extends Controller
     public function show($url)
     {
         $post = Post::where('url', $url)->firstOrFail();
+        if($post->status == 0){
+            abort(404);
+        }
         $comments = Comment::where('status', 1)
         ->whereNull('parent_id')
         ->where('post_id', $post->id)

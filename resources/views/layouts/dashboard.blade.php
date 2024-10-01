@@ -116,7 +116,9 @@
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar">
                 <h5 class="sidebar-heading">Content Management </h5>
                 <div class="accordion" id="sidebarAccordion">
-
+                    @can('admin-writer')
+                        
+                    
                     <!-- Posts Management Accordion -->
                     <div class="accordion-item bg-dark border-0">
                         <h2 class="accordion-header" id="headingPosts">
@@ -137,8 +139,10 @@
                             </div>
                         </div>
                     </div>
-
+                    @endcan
                     <!-- Pages Management Accordion -->
+                    @can('admin-editor')
+                        
                     <div class="accordion-item bg-dark border-0">
                         <h2 class="accordion-header" id="headingPages">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -158,7 +162,7 @@
                             </div>
                         </div>
                     </div>
-
+                    @endcan
                     @can('admin')
                     <div class="accordion-item bg-dark border-0">
                         <h2 class="accordion-header" id="headingCategories">
